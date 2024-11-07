@@ -1,0 +1,42 @@
+/*Style for CSS demo*/
+html{  box-sizing: border-box;
+}
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  body{
+    background-color:#8C503A ;
+    font-family: "Playfair Display", serif;
+
+  }
+
+  main{
+    background-color:#D9CCC1 ;
+    width:80vw;
+
+    /* long form */
+    margin:40px;
+    margin-top:40px;
+    margin-right:auto;
+    margin-bottom:40px;
+    margin-left:auto;
+
+    /* Top / Rihgt / Bottom / Left  */
+    margin: 40px auto 40px auto;
+
+    /* Top/Bottom | Left/Right */
+    margin: 40px auto;
+
+    border:2px solid #024059;
+
+    border-radius:4px;
+    
+    header.primary {
+        background-color:#024059;
+        padding:20px;
+        background-image: url("https://assets.codepen.io/7248/bg_1.png");
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+  }
