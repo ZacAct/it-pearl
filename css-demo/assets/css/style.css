@@ -4,6 +4,11 @@ html{  box-sizing: border-box;
   *, *:before, *:after {
     box-sizing: inherit;
   }
+/*--------- Utility Classes ---------*/
+
+.container{
+  padding:40px;
+}
 
   body{
     background-color:#8C503A ;
@@ -38,5 +43,53 @@ html{  box-sizing: border-box;
         background-image: url("https://assets.codepen.io/7248/bg_1.png");
         background-repeat:no-repeat;
         background-size:cover;
+        display:flex;
+        border-bottom: 3px solid #0ABFBF;
+
     }
+
+    header.primary h1 a{
+      color:aliceblue;
+      text-decoration:none;
+      font-size:2.5rem;
+      text-shadow:2px 2px #000;
+    }
+
+    header.primary h2{
+      color:aliceblue;
+
+    }
+    
+    header.primary nav ul{
+      list-style-type:none;
+      margin:0;
+    }
+
+    header.primary nav ul li{
+      margin-bottom:10px;
+    }
+
+    header.primary nav ul li a{
+      border: 1px solid #024059;
+      border-right:10px solid#cc3a67;
+      border-radius:20px 0;
+      color:white;
+      display:block;
+      background-color:rgba(0,0,0,.6);
+      padding:5px 5px 5px 0;
+
+    }
+
+    header.primary nav a:hover{
+      background-color:rgba(0,0,0, .9);
+      text-decoration:underline;
+    }
+
+    #content h2, #content h3{
+      color:#BF6415;
+      border-left: 7.5px solid #024059;
+      padding:7.5px;
+    }
+    
+
   }
