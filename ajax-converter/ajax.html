@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript AJAX">
+    <meta name="keywords" content="JavaScript, HTML, CSS">
+    <meta name="author" content="Zac Harrison">
+    <title>JavaScript Unit Converter</title>
+    <link href="style/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/additional-methods.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+<body>
+<form id="myform" onsubmit="return false">
+    <div class="formcontainer">
+        <h1>Unit Converter (AJAX)</h1>
+        <fieldset id="detail">
+            <legend>Unit Converter (AJAX)</legend>
+            <br>
+
+            <label class="formlabel" for="fromvalue">From Value: </label>
+            <input type="text" id="fromvalue" name="fromvalue" size="17" maxlength="17" 
+                data-rule-required="true" data-msg-required="From Value is required"
+                data-rule-number="true" data-msg-number="From Value must be a Number"> 
+            <label class="error" for="fromvalue" id="fromvalue-error"></label>
+            <br><br>
+
+            <label class="formlabel">From Unit: </label>
+            <label for="fromcentimeters">
+                <input type="radio" name="fromunit" id="fromcentimeters" value="cm"
+                       data-rule-required="true" data-msg-required="From Unit is Required" />centimeters
+            </label>
+            <label for="frommeters">
+                <input type="radio" name="fromunit" id="frommeters" value="m">Meters 
+            </label>
+            <label for="fromkilometers">
+                <input type="radio" name="fromunit" id="fromkilometers" value="km">kilometers
+            </label>
+            <label for="frominches">
+                <input type="radio" name="fromunit" id="frominches" value="in">inches
+            </label>
+            <label for="fromfeet">
+                <input type="radio" name="fromunit" id="fromfeet" value="ft">feet
+            </label>
+            <label for="fromyards">
+                <input type="radio" name="fromunit" id="fromyards" value="yd">yards
+            </label>
+            <label for="frommiles">
+                <input type="radio" name="fromunit" id="frommiles" value="mi">miles
+            </label>
+            <br><br>
+
+            <label class="formlabel">To Unit: </label>
+            <label for="tocentimeters">
+                <input type="radio" name="tounit" id="tocentimeters" value="cm" data-rule-required="true" data-msg-required="To Unit is Required">centimeters
+            </label>
+            <label for="tometers">
+                <input type="radio" name="tounit" id="tometers" value="m">Meters
+            </label>
+            <label for="tokilometers">
+                <input type="radio" name="tounit" id="tokilometers" value="km">kilometers
+            </label>
+            <label for="toinches">
+                <input type="radio" name="tounit" id="toinches" value="in">inches
+            </label>
+            <label for="tofeet">
+                <input type="radio" name="tounit" id="tofeet" value="ft">feet
+            </label>
+            <label for="toyards">
+                <input type="radio" name="tounit" id="toyards" value="yd">yards
+            </label>
+            <label for="tomiles">
+                <input type="radio" name="tounit" id="tomiles" value="mi">miles
+            </label>
+            <br><br>
+
+            <label class="formlabel">To Value:</label>
+            <span id="tovalue"></span>
+            <br><br>
+
+            <input type="button" value="Calculate" name="Calculate" onclick="calculate();">
+            <input type="button" value="Clear" name="Clear" onclick="clearform();" novalidate>
+        </fieldset>
+    </div>
+</form>
+</body>
+</html>
