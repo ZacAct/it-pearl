@@ -1,0 +1,82 @@
+/*  --------------- Utility Classes -----------------  */
+.container {
+  max-width: 2000px;
+  width: 80vw;
+  margin: 40px auto;
+}
+
+main{
+  background-color: #000000;
+  padding: 20px;
+  margin-top: 20px;
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
+}
+
+header.primary{
+  position: relative;
+  justify-content: space-between;
+}
+
+
+/*  --------------- Global Styles -------------------  */
+header.primary nav{
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-top: 0;
+  left: 0;
+  justify-content: flex-end;
+  padding: 1px 0;
+  background-color: #000000;
+}
+
+header.primary nav h1{
+  text-align: center;
+}
+
+header.primary nav ul {
+ width:100%;
+ display: flex;
+ justify-content: center;
+}
+
+header.primary nav ul li {
+  position: relative;
+  display: inline-block;
+}
+
+header.primary nav ul li a{
+  color:white;
+  display: block;
+  padding:10px 10px 10px 10px;
+  text-align: center;
+  transition:.5s;
+  font-size:.9;
+  text-decoration: none;
+}
+
+img {
+  
+  background-position: center; 
+  height: 500px; 
+}
+  
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+/*  --------------- Responsive Images -----------------  */
+img {
+  max-width: 100%;
+}
+
