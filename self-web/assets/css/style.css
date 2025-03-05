@@ -4,7 +4,11 @@
   width: 80vw;
   margin: 40px auto;
 }
-
+.logo {
+  place-items: left;
+  width: 100px;
+  height: 100px;
+}
 main{
   background-color: #000000;
   padding: 20px;
@@ -16,49 +20,52 @@ main{
 }
 
 header.primary{
+  font-size: 25px;
   position: relative;
-  justify-content: space-between;
-}
-
-
-/*  --------------- Global Styles -------------------  */
-header.primary nav{
-  position: relative;
-  width: 100%;
   display: flex;
-  margin-top: 0;
-  left: 0;
-  justify-content: flex-end;
-  padding: 1px 0;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
   background-color: #000000;
 }
 
-header.primary nav h1{
-  text-align: center;
+header.primary nav {
+  display: flex;
+  justify-content: center;
 }
 
 header.primary nav ul {
- width:100%;
  display: flex;
- justify-content: center;
+ justify-content: flex-end;
+ list-style: none;
+ margin: 0;
+ padding: 0;
 }
 
 header.primary nav ul li {
-  position: relative;
-  display: inline-block;
+  margin-left: 20px;
 }
 
 header.primary nav ul li a{
-  color:white;
-  display: block;
-  padding:10px 10px 10px 10px;
-  text-align: center;
-  transition:.5s;
-  font-size:.9;
+  color: white;
   text-decoration: none;
+  padding: 10px;
+  transition: 0.5s;
 }
 
-img {
+header.primary nav ul li a:hover{
+  background-color: #ffffff;
+  color: #000000;
+}
+
+header.primary img {
+  width: 100px;
+  height: 100px;
+  align-items: left;
+
+}
+
+hgroup {
   
   background-position: center; 
   height: 500px; 
