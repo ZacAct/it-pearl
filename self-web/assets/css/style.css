@@ -1,10 +1,14 @@
 /*  --------------- Utility Classes -----------------  */
 .container {
   max-width: 2000px;
-  width: 80vw;
+  width: 90vw;
   margin: 40px auto;
 }
 
+.text {
+  width: 90%; /* Increase the width */
+  padding: 20px;
+}
   /*  --------------- Global Styles -------------------  */
 
 
@@ -12,11 +16,23 @@
 body {
   font-family: "PT Serif", serif;
   font-style: normal;
-  font-size: 20px;
+  font-size: 25px;
   color: #ffffff;
   margin: 0;
   padding: 0;
   background-color: black;
+}
+
+main{
+  background-color: #000000;
+  line-height: 3;
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
+  zoom: 70%;
 }
 
 header.primary{
@@ -69,17 +85,7 @@ header.primary img {
 
 
 
-main{
-  background-color: #000000;
-  line-height: 3;
-  padding: 20px;
-  margin-top: 20px;
-  width: 70%;
-  max-width: 1200px;
-  margin: 0 auto;
-  height: auto;
-  zoom: 70%;
-}
+
 
 #colophon{
   background-color: #D90B1C;
@@ -141,4 +147,21 @@ hgroup {
 
 .flex-container:nth-of-type(3) .mbody {
   order: 2;
+}
+
+#gun{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+#gun .fade.container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+#gun img {
+  max-width: 100%;
 }
