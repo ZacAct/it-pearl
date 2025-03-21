@@ -137,6 +137,31 @@ header.primary img {
 #socials h5{
   font-size: 20px;
 }
+/*  --------------- Weather -----------------  */
+.formcontainer {
+  max-width: 1000px;
+  width: 100%;
+  padding: 5px;
+}
+
+#weatherdata {
+  grid-column: 1 / 3;
+}
+#forecast-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+#forecast-table {
+  grid-column: 1 / 2;
+}
+
+#forecast-chart {
+  max-width: 400%;
+  max-height: 400px;
+  
+}
 
 /*  --------------- Responsive Images -----------------  */
 img {
