@@ -27,107 +27,121 @@ window.addEventListener('scroll', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("location").value = "New Orleans";
+  getWeatherForecast();
+});
+
 $(document).ready(function () {
-    $("#DisplayTemp").click(getWeatherForecast);
-  });
-  
-  async function getWeatherForecast() {
+  $("#DisplayTemp").click(getWeatherForecast);
+});
+
+const rdr2Locations = {
+    "New Hanover": { latitude: 39.0997, longitude: -94.5786 },
+    "Valentine": { latitude: 40.7128, longitude: -74.0060 },
+    "Saint Denis": { latitude: 29.9511, longitude: -90.0715 }, // New Orleans
+};
+
+async function getWeatherForecast() {
     "use strict";
-  
-    let form = $("#myform");
-  
-    if (form.valid()) {
-      let locationInput = document.getElementById("location").value;
-      if (!locationInput) {
-        alert("Please enter a location");
-        return;
-      }
-  
-      let geocodeURL = `https://geocoding-api.open-meteo.com/v1/search?name=${locationInput}&count=10&format=json`;
-  
-      let geocodeResponse = await fetch(geocodeURL);
-      if (geocodeResponse.status >= 200 && geocodeResponse.status <= 299) {
+    let locationInput = document.getElementById("location").value.trim();
+
+    if (rdr2Locations[locationInput]) {
+        let locationData = rdr2Locations[locationInput];
+        fetchWeatherData(locationData.latitude, locationData.longitude, locationInput);
+    } else {
+        let geocodeURL = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(locationInput)}&count=10&format=json`;
+        let geocodeResponse = await fetch(geocodeURL);
+        if (!geocodeResponse.ok) {
+            alert("Failed to fetch location data.");
+            return;
+        }
         let geocodeData = await geocodeResponse.json();
         if (!geocodeData.results || geocodeData.results.length === 0) {
-          alert("No location found.");
-          return;
+            alert("No location found.");
+            return;
         }
         let locationData = geocodeData.results[0];
-  
-        let weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${locationData.latitude}&longitude=${locationData.longitude}&hourly=temperature_2m&temperature_unit=fahrenheit`;
-        let weatherResponse = await fetch(weatherURL);
-        if (weatherResponse.status >= 200 && weatherResponse.status <= 299) {
-          let weatherData = await weatherResponse.json();
-          let weatherHourly = weatherData.hourly;
-  
-          document.getElementById(
-            "location-info"
-          ).innerHTML = `<h3>${locationData.name}, ${locationData.admin1}, ${locationData.country}</h3>
-       <p><strong>Latitude =</strong> ${locationData.latitude} - <strong>Longitude =</strong> ${locationData.longitude}</p>`;
-  
-          let forecastTable =
-            "<table>" + "<caption><strong>Temperature</strong></caption>" + "<tr><th>Date</th><th>Temp</th></tr>";
-          let labels = [];
-          let temperatures = [];
-  
-          for (let i = 0; i < weatherHourly.time.length; i++) {
-            let unixTime = Date.parse(weatherHourly.time[i]);
-            let formattedTime = new Date(unixTime).toLocaleString();
-            forecastTable += `<tr><td>${formattedTime}</td><td>${weatherHourly.temperature_2m[i]}</td></tr>`;
-            labels.push(formattedTime);
-            temperatures.push(weatherHourly.temperature_2m[i]);
-          }
-          forecastTable += "</table>";
-          document.getElementById("forecast-table").innerHTML = forecastTable;
-  
-          if (window.myChart) {
-            window.myChart.destroy();
-          }
-  
-          let ctx = document.getElementById("forecast-chart").getContext("2d");
-          window.myChart = new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: labels,
-              datasets: [
-                {
-                  label: "Temperature (°F)",
-                  data: temperatures,
-                  borderColor: "#b5d9a0",
-                  fill: false
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              scales: {
-                x: { title: { display: true, text: "" } },
-                y: { title: { display: true, text: "" } }
-              }
-            }
-          });
-        } else {
-          alert("Failed to fetch weather data.");
-        }
-      } else {
-        alert("Failed to fetch location data.");
-      }
+        fetchWeatherData(locationData.latitude, locationData.longitude, locationData.name);
     }
-  }
-  
-  function clearForm() {
+}
+
+async function fetchWeatherData(latitude, longitude, locationName) {
+    let weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=auto`;
+    let weatherResponse = await fetch(weatherURL);
+    if (!weatherResponse.ok) {
+        alert("Failed to fetch weather data.");
+        return;
+    }
+    let weatherData = await weatherResponse.json();
+    let { time, temperature_2m_max, temperature_2m_min } = weatherData.daily;
+    
+    document.getElementById("location-info").innerHTML = `<h3>${locationName}</h3>`;
+    
+    let forecastTable = `<table><caption><strong>7-Day Temperature Forecast</strong></caption>
+      <tr><th>Date</th><th>Max Temp (°F)</th><th>Min Temp (°F)</th></tr>`;
+
+    let labels = [];
+    let maxTemps = [];
+    let minTemps = [];
+
+    for (let i = 0; i < time.length; i++) {
+      let formattedDate = new Date(time[i]).toLocaleDateString();
+      forecastTable += `<tr>
+        <td>${formattedDate}</td>
+        <td>${temperature_2m_max[i]}°F</td>
+        <td>${temperature_2m_min[i]}°F</td>
+      </tr>`;
+
+      labels.push(formattedDate);
+      maxTemps.push(temperature_2m_max[i]);
+      minTemps.push(temperature_2m_min[i]);
+    }
+
+    forecastTable += "</table>";
+    document.getElementById("forecast-table").innerHTML = forecastTable;
+
+    if (window.myChart) {
+      window.myChart.destroy();
+    }
+
+    let ctx = document.getElementById("forecast-chart").getContext("2d");
+    window.myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Max Temperature (°F)",
+            data: maxTemps,
+            borderColor: "red",
+            fill: false
+          },
+          {
+            label: "Min Temperature (°F)",
+            data: minTemps,
+            borderColor: "blue",
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: false }
+        }
+      }
+    });
+}
+
+function clearForm() {
     "use strict";
     document.getElementById("location").value = "";
     document.getElementById("location-info").innerHTML = "";
     document.getElementById("forecast-table").innerHTML = "";
-  
+
     if (window.myChart) {
-      window.myChart.destroy();
+        window.myChart.destroy();
     }
-  }
-  
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("location").value = "New York"; // Set Default Location
-    getWeatherForecast(); // Automatically fetch forecast on page load
-  });
+}

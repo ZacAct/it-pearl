@@ -37,25 +37,34 @@
         </div>
    
 
-    <section id="weather" class="container">
-        <form id="myform">
-            <div class="formcontainer">
-                <h1>RDR2 Weather</h1>
-                <label class="formlabel" for="location"> Enter Location: </label>
-                <input type="text" id="location" name="Location" size="30" maxlength="30" value="Louisiana" data-rule-required="true" data-msg-required="Location is Required"><br>
-                <button id="displayweather">Display Weather</button>
-                <input type="button" value="Clear" id="Clear" name="Clear" onclick="clearForm();">
-            </div>
-          </form>
-          <div id="weatherdata"></div>
-          <div id="forecast-container"></div>
-          <div id="forecast-table"></div>
-          <div id="forecast-chart"></div>
-    </section>
+        <section class="weather">
+          <h2>7-Day Temperature Forecast</h2>
+          <p>Enter a location to get the latest weather forecast.</p>
 
+          <!-- Input Field & Buttons -->
+          <div class="input-container">
+              <input type="text" id="location" placeholder="Enter a location">
+              <button id="DisplayTemp">Get Forecast</button>
+              <button onclick="clearForm()">Clear</button>
+          </div>
+
+          <!-- Error Messages -->
+          <p id="error-message" style="color: red; display: none;">Please enter a valid location.</p>
+
+          <!-- Location Info -->
+          <div id="location-info"></div>
+
+          <!-- Forecast Table -->
+          <div id="forecast-table"></div>
+
+          <!-- Chart Canvas -->
+          <canvas id="forecast-chart"></canvas>
+      </section>
+      
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.21.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/script.js"></script>
 
 
