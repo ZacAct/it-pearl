@@ -151,15 +151,22 @@ header.primary img {
   display: flex;
   flex-direction: column;
 }
+#forecast-table {
+  grid-column: 1 / 2;
+}
 
-.forecast-chart {
-  width: 300px;
-  height: 300px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ffffff;
+#forecast-table th {
+  color: #ffffff;
+  padding: 10px;
+}
+
+#forecast-chart {
+  width: 100%;
+  max-width: 600px;
+  max-height: 300px;
 
 }
+
 
 /*  --------------- Responsive Images -----------------  */
 img {
